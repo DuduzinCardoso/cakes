@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+cloud:
+  aws:
+    credentials:
+      session-token:
+      access-key:
+      secret-key:
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
+application:
+  security:
+    jwt:
+      secret-key: 34753778214125442A472D4A614E645267556B58703273357638792F423F4528
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+  bucket:
+    name: javanime
+
+spring:
+  profiles:
+    active:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 6MB
+      max-request-size: 10MB
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true
+
+  logging:
+    pattern:
+      console: "%d %-5level %logger : %msg%n"
+    level:
+      org.springframework: info
+      org.hibernate: debug
